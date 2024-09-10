@@ -8,6 +8,13 @@
       name: nginx
       state: started
 
+
+   - name: import tasks from common role
+     ansible.builtin.import_role:
+      name: common
+      tasks_from: app-pre-req
+
+
   #  - name: remove html directory
   #    ansible.builtin.file:
   #     path: /usr/share/nginx/html
@@ -17,11 +24,11 @@
   #       url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
   #       dest: /tmp/frontend.zip
 
-   - name: extract the code
-     ansible.builtin.unarchive:
-      src: /tmp/frontend.zip
-      dest: /usr/share/nginx/html
-      remote_src: yes
+  #  - name: extract the code
+  #    ansible.builtin.unarchive:
+  #     src: /tmp/frontend.zip
+  #     dest: /usr/share/nginx/html
+  #     remote_src: yes
 
    - name: copy expense file
      ansible.builtin.template:
